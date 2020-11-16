@@ -1,5 +1,5 @@
 import random
-
+import time
 # this function is to calculate the heuristic value of the board and maximize the result as the highest value can be 28
 def value(board):
 	v = 0
@@ -57,7 +57,7 @@ def m():
 			zoom = list(board)
 		success,board = code(board)
 		c+=1
-		if(success or (c > ((1.5*size) + 1)) ):
+		if(success or (c > ((cappedValue) + 1)) ):
 			print(board)
 			print("Restart number"+str(c)+"\n")
 			return str(board), str(c), str(zoom)
@@ -73,12 +73,14 @@ result = "Random Restart Hill Climbing" + " result:\n\n"
 # number of test cases
 ncase = int(input("number of test cases = \n"))
 ok = 0
+cappedValue = int(input("Capped value of Random Restart = \n"))
+ti = time.time()
 for i in range(ncase):
 	board, c, original = m()
 	# after adding thee random restart function we get our accuracy to 100 % in avg restarts given 
 	avg += int(c)
 	 # we print the original board and its solution in the file
-	if(int(c) > 1.5*size):
+	if(int(c) > cappedValue):
 		result += "Case:  " + original + " ----> " + "Failed" + "\n"
 	else:
 		ok+=1
@@ -87,7 +89,9 @@ avg = avg / ncase
 result += "average Random Restart are : "+str(avg)
 result += "Total case number: " + str(ncase) + ", Success case number: " + str(ok) + '\n'
 result += "Success rate: " + str(ok / float(ncase)) + '\n'
-result += "random restarts were capped at "+ str(int(1.5*size)) + '\n'
+result += "random restarts were capped at "+ str(int(cappedValue)) + '\n'
+tf = time.time()
+result += "average time taken is : "+ str( time.localtime(tf-ti).tm_sec / float(ncase) ) + 'sec\n'
 # here we add all the results in the file RRHC.txt 
 f = open("RRHC" + '.txt', 'w+')
 f.write(result)

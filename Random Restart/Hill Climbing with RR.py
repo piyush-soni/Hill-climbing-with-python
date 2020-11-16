@@ -1,4 +1,5 @@
 import random
+import time
 
 # this function is to calculate the heuristic value of the board and maximize the result as the highest value can be 28
 def value(board):
@@ -72,6 +73,7 @@ size = int(input("size of board = \n"))
 result = "Random Restart Hill Climbing" + " result:\n\n"
 # number of test cases
 ncase = int(input("number of test cases = \n"))
+ti = time.time()
 for i in range(ncase):
 	board, c, original = m()
 	# after adding thee random restart function we get our accuracy to 100 % in avg restarts given 
@@ -79,7 +81,9 @@ for i in range(ncase):
 	 # we print the original board and its solution in the file
 	result += "Case:  " + original + " ----> " + board + ": Random Restart taken - "+ c + "\n"
 avg = avg / ncase
-result += "average Random Restart are : "+str(avg)
+result += "average Random Restart are : "+ str(avg) + '\n'
+tf = time.time()
+result += "average time taken is : "+ str( time.localtime(tf-ti).tm_sec / float(ncase) ) + 'sec\n'
 # here we add all the results in the file RRHC.txt 
 f = open("RRHC" + '.txt', 'w+')
 f.write(result)

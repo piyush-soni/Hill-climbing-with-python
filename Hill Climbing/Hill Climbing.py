@@ -1,4 +1,5 @@
 import random
+import time
 
 # this parameter is used to check if the code is stuck on a local minima
 Repeat = 0
@@ -72,6 +73,7 @@ result = "Hill Climbing" + " result:\n\n"
 # number of test cases
 ncase = int(input("number of test cases = \n"))
 # initially the Success cases are zero 
+ti = time.time()
 successCase = 0
 for i in range(ncase):
     # a new board is created
@@ -89,6 +91,8 @@ for i in range(ncase):
         result += str(board) + status + "\n"
 result += "Total case number: " + str(ncase) + ", Success case number: " + str(successCase) + '\n'
 result += "Success rate: " + str(successCase / float(ncase)) + '\n'
+tf = time.time()
+result += "average time taken is : "+ str( time.localtime(tf-ti).tm_sec / float(ncase) ) + 'sec\n'
 # here we add all the results in the file HC.txt 
 f = open("HC" + '.txt', 'w+')
 f.write(result)

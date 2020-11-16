@@ -1,8 +1,10 @@
 import random
 import math
+import time
 
 # this parameter is to check if we were unsuccessfull in solving the test case
 FAILED = False
+maxRound = 500000
 
 # this function is to calculate the heuristic value of the board
 def kills(board):
@@ -45,7 +47,7 @@ def step_SimulatedAnnealing(board):
 # this function is here to decide if the code has reached the lowest heuristic value or not 
 def solution_SimulatedAnnealing(board):
     # the success rate will increase by increasing the maxRound but the time to calculate will also increase
-    maxRound = 500000
+    global maxRound
     count = 0
     while True:
         collisionNum = kills(board)
@@ -77,6 +79,8 @@ result = "Simulated Annealing Hill Climbing" + " result:\n\n"
 ncase = int(input("number of test cases = \n"))
 # initially the Success cases are zero 
 successCase = 0
+maxRound = int(input("Max rounds allowed = \n"))
+ti = time.time()
 for i in range(ncase):
     # a new board is created
     board = []
@@ -93,6 +97,9 @@ for i in range(ncase):
         result += str(board) + status + "\n"
 result += "Total case number: " + str(ncase) + ", Success case number: " + str(successCase) + '\n'
 result += "Success rate: " + str(successCase / float(ncase)) + '\n'
+tf = time.time()
+result += "Max Rounds capped at : " + str(maxRound) + '\n'
+result += "average time taken is : "+ str( time.localtime(tf-ti).tm_sec / float(ncase) ) + 'sec\n'
 # here we add all the results in the file SAHC.txt 
 f = open("SAHC" + '.txt', 'w+')
 f.write(result)
