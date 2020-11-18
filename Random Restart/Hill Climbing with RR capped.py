@@ -86,7 +86,7 @@ for i in range(ncase):
 		ok+=1
 		result += "Case:  " + original + " ----> " + board + ": Random Restart taken - "+ c + "\n"
 avg = avg / ncase
-result += "average Random Restart are : "+str(avg)
+result += "average Random Restart are : "+str(avg) + '\n'
 result += "Total case number: " + str(ncase) + ", Success case number: " + str(ok) + '\n'
 result += "Success rate: " + str(ok / float(ncase)) + '\n'
 result += "random restarts were capped at "+ str(int(cappedValue)) + '\n'
